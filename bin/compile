@@ -55,7 +55,9 @@ APT_KEYRING="$CACHE_DIR/apt/trusted.gpg"
 GPG_KEY_FILE="$BUILDPACK_DIR/etc/datadog.gpg"
 GPG_HOME_DIR="$BUILD_DIR/.gnupg"
 mkdir -p "$GPG_HOME_DIR"
-gpg --ignore-time-conflict --no-options --no-default-keyring --homedir "$GPG_HOME_DIR" --keyring "$APT_KEYRING" --import "$GPG_KEY_FILE" | indent
+
+# This is failing on flynn.io cedar images.
+# gpg --ignore-time-conflict --no-options --no-default-keyring --homedir "$GPG_HOME_DIR" --keyring "$APT_KEYRING" --import "$GPG_KEY_FILE" | indent
 
 # If a version hasn't been specified, use the pinned version
 if [ -f "$ENV_DIR/DD_AGENT_VERSION" ]; then
